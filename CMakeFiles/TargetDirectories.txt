@@ -1,0 +1,3 @@
+/home/gabriel/Opencv tests/CMakeFiles/edit_cache.dir
+/home/gabriel/Opencv tests/CMakeFiles/rebuild_cache.dir
+/home/gabriel/Opencv tests/CMakeFiles/videocap.dir

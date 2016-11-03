@@ -1,0 +1,6 @@
+Credits (and sources) to:
+http://opencv-srf.blogspot.com/2010/09/object-detection-using-color-seperation.html
+
+http://docs.opencv.org/2.4/doc/tutorials/introduction/linux_install/linux_install.html#linux-installation
+
+This is a simple test to enable GPIO's according to camera detection of a red object (will probably change the color later) position on camera on a raspberry (or anything with GPIO's).

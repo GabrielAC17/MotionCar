@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+PROJECT( displayimage )
+FIND_PACKAGE( OpenCV REQUIRED )
+ADD_EXECUTABLE( videocap videocap.cpp )
+TARGET_LINK_LIBRARIES( videocap ${OpenCV_LIBS} )
