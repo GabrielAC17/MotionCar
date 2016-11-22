@@ -11,8 +11,6 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "lp.h"
-
 //Motor 1 front and back
 #define m1f 1
 #define m1b 2
@@ -51,7 +49,7 @@ using namespace std;
 	GPIOExport(m2b);
 	GPIODirection(m2b, OUTPUT);
  
-	VideoCapture cap(1); //capture the video from webcam
+	VideoCapture cap(0); //capture the video from webcam
 
     if ( !cap.isOpened() )  // if not success, exit program
     {
@@ -59,7 +57,7 @@ using namespace std;
          return -1;
     }
 
-    //namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
+    namedWindow("Control", CV_WINDOW_AUTOSIZE); //create a window called "Control"
 
 	int iLowH = 0;
 	int iHighH = 179;
@@ -70,7 +68,7 @@ using namespace std;
 	int iLowV = 67;
 	int iHighV = 255;
 
-	/*
+	
 	//Create trackbars in "Control" window
 	createTrackbar("LowH", "Control", &iLowH, 179); //Hue (0 - 179)
 	createTrackbar("HighH", "Control", &iHighH, 179);
@@ -80,7 +78,7 @@ using namespace std;
 
 	createTrackbar("LowV", "Control", &iLowV, 255);//Value (0 - 255)
 	createTrackbar("HighV", "Control", &iHighV, 255);
-	*/
+	
 
 	/*
 	int iLastX = -1; 
@@ -139,7 +137,7 @@ using namespace std;
 			//calculate the position of the ball
 			int posX = dM10 / dArea;
 			int posY = dM01 / dArea;        
-        
+        		cout<<dArea<<endl;
 			if (posX >=0 && posX <= (picCols/3))
 			{
 				cout<<"Go left"<<endl;
@@ -163,11 +161,31 @@ using namespace std;
 			
 			else
 			{
-				cout<<"Stop"<<endl;
-				GPIOWrite(m1f,LOW);
-				GPIOWrite(m1b,LOW);
-				GPIOWrite(m2f,LOW);
-				GPIOWrite(m2b,LOW);
+				if (dArea < 500000)
+				{
+					cout<<"Forward"<<endl;
+					GPIOWrite(m1f,HIGH);
+					GPIOWrite(m1b,LOW);
+					GPIOWrite(m2f,HIGH);
+					GPIOWrite(m2b,LOW);
+				}
+				
+				else if (dArea > 2000000)
+				{
+					cout<<"Back"<<endl;
+					GPIOWrite(m1f,LOW);
+					GPIOWrite(m1b,HIGH);
+					GPIOWrite(m2f,LOW);
+					GPIOWrite(m2b,HIGH);
+				}
+				else {
+					cout<<"Stop"<<endl;
+					GPIOWrite(m1f,LOW);
+					GPIOWrite(m1b,LOW);
+					GPIOWrite(m2f,LOW);
+					GPIOWrite(m2b,LOW);
+				}
+				
 			}
 
 			/*
